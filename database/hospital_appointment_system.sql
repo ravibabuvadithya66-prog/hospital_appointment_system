@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS hospital_appointment_system CHARACTER SET utf8mb4;
+USE hospital_appointment_system;
+CREATE TABLE IF NOT EXISTS doctors(id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(100) NOT NULL,specialty VARCHAR(100) NOT NULL);
+CREATE TABLE IF NOT EXISTS appointments(id INT AUTO_INCREMENT PRIMARY KEY,patient_name VARCHAR(100) NOT NULL,phone VARCHAR(10) NOT NULL,email VARCHAR(150) NOT NULL,doctor_id INT NOT NULL,appointment_date DATE NOT NULL,appointment_time VARCHAR(20) NOT NULL,reason VARCHAR(500),created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,CONSTRAINT fk_doc FOREIGN KEY(doctor_id) REFERENCES doctors(id),CONSTRAINT uq_slot UNIQUE(doctor_id,appointment_date,appointment_time));
+INSERT INTO doctors(name,specialty) SELECT 'Dr. Ananya Rao','General Physician' WHERE NOT EXISTS(SELECT 1 FROM doctors WHERE name='Dr. Ananya Rao');
+INSERT INTO doctors(name,specialty) SELECT 'Dr. Kiran Kumar','Cardiologist' WHERE NOT EXISTS(SELECT 1 FROM doctors WHERE name='Dr. Kiran Kumar');
+INSERT INTO doctors(name,specialty) SELECT 'Dr. Meera Shah','Dermatologist' WHERE NOT EXISTS(SELECT 1 FROM doctors WHERE name='Dr. Meera Shah');
+INSERT INTO doctors(name,specialty) SELECT 'Dr. Arjun Reddy','Orthopedist' WHERE NOT EXISTS(SELECT 1 FROM doctors WHERE name='Dr. Arjun Reddy');
+INSERT INTO doctors(name,specialty) SELECT 'Dr. Priya Nair','Pediatrician' WHERE NOT EXISTS(SELECT 1 FROM doctors WHERE name='Dr. Priya Nair');
+INSERT INTO doctors(name,specialty) SELECT 'Dr. Rahul Verma','Dentist' WHERE NOT EXISTS(SELECT 1 FROM doctors WHERE name='Dr. Rahul Verma');
